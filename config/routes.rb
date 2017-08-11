@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   
+  devise_for :users
+  
   root "photos#index"
+  
+  # Routes for Users:
+  # READ
+  get "/users", :controller => "users", :action => "index"
+  get "/users/:id", :controller => "users", :action => "show"
   
   # Routes for the Comment resource:
   # CREATE
@@ -44,6 +51,8 @@ Rails.application.routes.draw do
   # READ
   get "/photos", :controller => "photos", :action => "index"
   get "/photos/:id", :controller => "photos", :action => "show"
+  
+  get "/my_likes", :controller => "photos", :action => "favorites"
 
   # UPDATE
   get "/photos/:id/edit", :controller => "photos", :action => "edit"
@@ -52,8 +61,7 @@ Rails.application.routes.draw do
   # DELETE
   get "/delete_photo/:id", :controller => "photos", :action => "destroy"
   #------------------------------
-
-  devise_for :users
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   mount WebGit::Engine, at: "/rails/git"
 end
