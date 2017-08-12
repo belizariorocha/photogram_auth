@@ -16,6 +16,7 @@
       </tr>
 
       <% current_user.liked_photos.each do |photo| %>
+      <% @like = Like.find_by({ :user_id => current_user, :photo_id => photo.id }) %>
       <tr>
         <td><%= photo.caption %></td>
         <td><img src="<%= photo.image %>" width="300"></td>
@@ -23,7 +24,7 @@
         <td>
           <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
           <!--<a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>-->
-          <!--<a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>-->
+          <a href="/delete_like/<%= @like.id %>" class="btn btn-danger" rel="nofollow">Delete like</a>
         </td>
       </tr>
       <% end %>
